@@ -48,9 +48,9 @@ var wheelBarrow = function(){
 	var sc1 = BEZIER(S0)([[4,-0.9,1.95]]);
 	var sideA = MAP(BEZIER(S1)([sc0, sc1]))(domain2D);
 	var sideB = T([0,1,2])([0,0,-0.05])(sideA);
-	var scTop1 = BEZIER(S0)([[-0.4,1.8,1.95],[4,1.8,1.95]]);
-	var scTop2 = BEZIER(S0)([[-0.42,1.8,1.925],[-0.42,1.82,1.925],[4.1,1.82,1.925]]);
-	var scTop3 = BEZIER(S0)([[-0.4,1.8,1.9],[4,1.8,1.9]]);
+	var scTop1 = BEZIER(S0)([[-0.4,1.8,1.95],[-0.39,1.8,1.95],[4,1.8,1.95]]);
+	var scTop2 = BEZIER(S0)([[-0.42,1.8,1.925],[-0.415,1.95,1.925],[4.1,1.82,1.925]]);
+	var scTop3 = BEZIER(S0)([[-0.4,1.8,1.9],[-0.39,1.8,1.9],[4,1.8,1.9]]);
 	var sideTopBezier = MAP(BEZIER(S1)([scTop1, scTop2, scTop3]))(domain2D);
 	var scRight1 = BEZIER(S0)([[4,1.8,1.95],[4,-0.9,1.95]]);
 	var scRight2 = BEZIER(S0)([[4.1,1.82,1.925],[4.1,-0.93,1.925]]);
@@ -65,8 +65,46 @@ var wheelBarrow = function(){
 	var stabilizerA = COLOR(blackColor)(T([0,1,2])([3.6,-0.9,1.7])(CUBOID([0.45,0.3,0.45])));
 	var stabilizerB = T([0,1,2])([0,0,-3.85])(stabilizerA);
 
+	//Diagonal Board
+	var dbc0 = BEZIER(S0)([[-0.41,1.9,1.9],[-0.41,1.9,-1.9]]);
+	var dbc1 = BEZIER(S0)([[2.16,0.31,1.9],[2.16,0.31,-1.9]]);
+	var dBoardA = MAP(BEZIER(S1)([dbc0, dbc1]))(domain2D);
+	var dBoardB = T([0,1,2])([0.07,0.01,0])(dBoardA);
+	var dbcTop1 = BEZIER(S0)([[-0.41,1.9,1.9],[-0.41,1.9,-1.9]]);
+	var dbcTop2 = BEZIER(S0)([[-0.39,1.92,1.9],[-0.39,1.92,-1.9]]);
+	var dbcTop3 = BEZIER(S0)([[-0.34,1.91,1.9],[-0.34,1.91,-1.9]]);
+	var dbTopBezier = MAP(BEZIER(S1)([dbcTop1, dbcTop2, dbcTop3]))(domain2D);
+	var boardDiagonal = COLOR(blueColor)(T([0,1,2])([0,0,0])(STRUCT([dBoardA, dBoardB, dbTopBezier])));	
+
+	//Horizontal Board
+	var hbc0 = BEZIER(S0)([[4.1,0.31,2.2],[4.6,0.31,2.2]]);
+	var hbc1 = BEZIER(S0)([[4.1,0.31,-2.2],[4.6,0.31,-2.2]]);
+	var hBoardA = MAP(BEZIER(S1)([hbc0, hbc1]))(domain2D);
+	var hBoardB = T([0,1,2])([0,0.05,0])(hBoardA);
+	var hbcFront1 = BEZIER(S0)([[4.1,0.31,2.2],[4.6,0.31,2.2]]);
+	var hbcFront2 = BEZIER(S0)([[4,0.335,2.3],[4.7,0.335,2.3]]);
+	var hbcFront3 = BEZIER(S0)([[4.1,0.36,2.2],[4.6,0.36,2.2]]);
+	var hbFrontBezier = MAP(BEZIER(S1)([hbcFront1, hbcFront2, hbcFront3]))(domain2D);
+	var hbcRear1 = BEZIER(S0)([[4.1,0.31,-2.2],[4.6,0.31,-2.2]]);
+	var hbcRear2 = BEZIER(S0)([[4,0.335,-2.3],[4.7,0.335,-2.3]]);
+	var hbcRear3 = BEZIER(S0)([[4.1,0.36,-2.2],[4.6,0.36,-2.2]]);
+	var hbRearBezier = MAP(BEZIER(S1)([hbcRear1, hbcRear2, hbcRear3]))(domain2D);
+	var hbcInner1 = BEZIER(S0)([[4.1,0.31,2.2],[4.1,0.31,-2.2]]);
+	var hbcInner2 = BEZIER(S0)([[4,0.335,2.3],[4,0.335,-2.3]]);
+	var hbcInner3 = BEZIER(S0)([[4.1,0.36,2.2],[4.1,0.36,-2.2]]);
+	var hbInnerBezier = MAP(BEZIER(S1)([hbcInner1, hbcInner2, hbcInner3]))(domain2D);
+	var hbcOuter1 = BEZIER(S0)([[4.6,0.31,2.2],[4.6,0.31,-2.2]]);
+	var hbcOuter2 = BEZIER(S0)([[4.7,0.335,2.3],[4.7,0.335,-2.3]]);
+	var hbcOuter3 = BEZIER(S0)([[4.6,0.36,2.2],[4.6,0.36,-2.2]]);
+	var hbOuterBezier = MAP(BEZIER(S1)([hbcOuter1, hbcOuter2, hbcOuter3]))(domain2D);
+	var hbc2 = BEZIER(S0)([[4.1,0.31,1.9],[2.17,0.31,1.9]]);
+	var hbc3 = BEZIER(S0)([[4.1,0.31,-1.9],[2.17,0.31,-1.9]]);
+	var hBoardAlong = MAP(BEZIER(S1)([hbc2, hbc3]))(domain2D);
+	var hBoardBlong = T([0,1,2])([0,0.05,0])(hBoardAlong);
+	var boardHorizontal = COLOR(blackColor)(T([0,1,2])([0,0,0])(STRUCT([hBoardA, hBoardB, hbFrontBezier, hbRearBezier, hbInnerBezier, hbOuterBezier, hBoardAlong, hBoardBlong])));	
+
 	//Model
-	var model = STRUCT([wheel, bars, sides1, sides2, stabilizerA, stabilizerB]);
+	var model = STRUCT([wheel, bars, sides1, sides2, stabilizerA, stabilizerB, boardDiagonal, boardHorizontal]);
 	return model;
 
 };
