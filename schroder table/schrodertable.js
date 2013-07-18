@@ -17,14 +17,14 @@ var cylinder = function(radius, height, quality) {
 
 var schroderTable = function(){
 
-	var coloringDepth = 0.001;
+	var coloringDepth = 0.003;
 	var domain2D = PROD1x1([INTERVALS(1)(40),INTERVALS(1)(40)]);
 
 	//Base disk
 	var radiusBase = 3;
 	var base = COLOR(whiteColor)(cylinder(radiusBase, 0.3, 256));
 	var baseTop = COLOR(redColor)(cylinder(radiusBase, coloringDepth, 256));
-	var baseDisk = STRUCT([R([1,2])([PI/2])(base), T([0,1,2])([0,0.001,0])(R([1,2])([PI/2])(baseTop))]);
+	var baseDisk = STRUCT([R([1,2])([PI/2])(base), T([0,1,2])([0,0.003,0])(R([1,2])([PI/2])(baseTop))]);
 
 	//Lower Section
 	var lowerSectionHeight = 5.5;
